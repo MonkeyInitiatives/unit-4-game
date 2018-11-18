@@ -1,0 +1,21 @@
+.character-image {
+	width: 200px;
+	height: 200px;
+  	padding: 20px;
+  	clear: both;
+}
+
+.characters{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.centered {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.yourCharacter{
+	display: block; 
+}
