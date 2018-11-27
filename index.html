@@ -9,30 +9,34 @@
 	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- 	  <script src="game.js"></script> -->
+	  <script src="assets/javascript/game.js"></script>
 </head>
 <body>
 	
 	<div class="container">
-		<div class="row characters">
+		<div class="row characters character">
 		</div>
 	</div>
 	<div class="container">
 		<h1>Your Character</h1>
-		<div class="row yourCharacter">
+		<div class="row yourCharacter character">
 		</div>
 	</div>
 	
 	<div class="container">
 		<h1>Enemies Available to Attack</h1>
-		<div class="row fighters">
+		<div class="row fighters character">
 		</div>
 	</div>
 	
 	<div class="container">
 		<h1>Defender</h1>
-		<div class="row defender">
+		<div class="row defender character">
 		</div>
+	</div>
+	
+	<div class="container">
+		<button type="button" class="btn btn-primary btn-lg btn-attack">Attack</button>
 	</div>
 	
 	<div class="container">
@@ -41,184 +45,8 @@
 	</div>
 	
 	<div class="container">
-		<button type="button" class="btn btn-primary btn-lg btn-attack">Attack</button>
-	</div>
-	
-	<div class="container">
 		<button type="button" class="btn btn-primary btn-lg btn-restart">Restart</button>
 	</div>
-	
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<script type="text/javascript">
-		
-		
-		
-		
-function character(name, health, attack, counter){
-	this.name = name;
-	this.health = health;
-	this.attack = attack;
-	this.counter = counter;
-	this.image = "assets/images/"+name+".jpg";
-};
-
-var Revan = new character("Revan", 55, 6, 6);
-var Bastila = new character("Bastila", 65, 7, 7);
-var HK47 = new character("HK47", 75, 8, 8);
-var Malak = new character("Malak", 100, 10, 10);
-
-var baseDamage = 0;
-
-var characterArray = [Revan, Bastila, HK47, Malak];
-
-var userCharacter;
-var enemyCharacter;
-
-
-
-$(".btn").hide();
-
-function addCharacters(divClass, show){
-	for (var i = 0; i < characterArray.length; i++) {
-		
-		var characterImage = $("<img>");
-		characterImage.addClass("character-image");
-		characterImage.attr('id', characterArray[i].name+"Image");
-		characterImage.attr("src", characterArray[i].image);
-		characterImage.attr("data-name", characterArray[i].name);
-		characterImage.attr("data-health", characterArray[i].health);
-		characterImage.attr("data-attack", characterArray[i].attack);
-		characterImage.attr("data-counter", characterArray[i].counter);
-		characterImage.attr("data-image", characterArray[i].image);
-		$(divClass).append(characterImage);
-		if(show){
-			characterImage.show();
-		}
-		else{
-			characterImage.hide();
-		}
-	// 	$("."+characterArray[i].name+"Image").wrapAll( "<div class="+characterArray[i].name+"Div"+" />");
-	}
-}
-addCharacters(".characters", true);
-addCharacters(".yourCharacter", false);
-addCharacters(".fighters", false);
-addCharacters(".defender", false);
-
-var clicks = 0;
-
-function restart(){
-	Revan = new character("Revan", 55, 6, 6);
-	Bastila = new character("Bastila", 65, 7, 7);
-	HK47 = new character("HK47", 75, 8, 8);
-	Malak = new character("Malak", 100, 10, 10);
-	
-	baseDamage = 0;
-	
-	characterArray = [Revan, Bastila, HK47, Malak];
-	
-	userCharacter="";
-	enemyCharacter="";
-	$(".characters").empty();
-	$(".yourCharacter").empty();
-	$(".fighters").empty();
-	$(".defender").empty();
-	addCharacters(".characters", true);
-	addCharacters(".yourCharacter", false);
-	addCharacters(".fighters", false);
-	addCharacters(".defender", false);
-	$(".yourDetail").hide();
-	$(".enemyDetail").hide();
-	$(".btn-attack").hide();
-	$(".btn-restart").hide();
-	clicks = 0;
-	console.log("Clicks should be back to 0, yes? "+clicks);
-}
-
-function attack(){
-	var strike = parseInt(enemyCharacter.attr("data-health"))-parseInt(userCharacter.attr("data-attack"));
-	enemyCharacter.attr("data-health", strike);		
-	var userAttackIncrease = parseInt(userCharacter.attr("data-attack"))+parseInt(baseDamage);
-	console.log("user attack damage "+userAttackIncrease);
-	userCharacter.attr("data-attack", userAttackIncrease);
-	if(parseInt(enemyCharacter.attr("data-health"))>0){
-		var enemyStrike = parseInt(userCharacter.attr("data-health"))-parseInt(enemyCharacter.attr("data-attack"));
-		userCharacter.attr("data-health", enemyStrike);
-	}
-	else{
-		enemyCharacter.hide();
-		clicks--;
-	}
-	$(".yourDetail").text("You attacked "+enemyCharacter.attr("data-name")+" for "+userCharacter.attr("data-attack")+" damage.");
-	$(".enemyDetail").text(enemyCharacter.attr("data-name")+" attacked you back for "+enemyCharacter.attr("data-attack")+" damage.")
-	console.log("User health "+userCharacter.attr("data-health"));
-	console.log("Enemy health "+enemyCharacter.attr("data-health"));
-	if(parseInt(userCharacter.attr("data-health"))<=0){
-		userCharacter.hide();
-		$(".yourDetail").hide();
-		$(".enemyDetail").text("You were defeated. GAME OVER!!!");
-		console.log("YOU LOST");
-		$(".btn-restart").show();
-	}
-}
-
-$(".btn-attack").on("click", function() {
-	attack();
-});
-
-$(".btn-restart").on("click", function() {
-	restart();
-});
-
-$(".character-image").on("click", function() {
-	console.log("This should print no matter what");
-	var userCharacterID = $(this).attr("id");
-	console.log("clicks "+clicks);
-// 	if($(".yourCharacter:hidden img").length===0){
-	if(clicks==0){
-		userCharacter = $(this);
-		//yourCharacter
-		$(".yourCharacter").find("#"+$(this).attr("id")).show();
-		baseDamage = $(this).attr("data-attack");
-// 		$(".characters").find("#"+$(this).attr("id")).hide();				
-		//fighters
-		$(".character-image").each(function() {  
-
-			if($(this).parent().hasClass("fighters")){
-			   
-			   if(userCharacterID==$(this).attr("id")){
-			   }
-			   else{
-				   $(this).show();
-			   }
-			   
-		   }
-		   else if($(this).parent().hasClass("characters")){
-			   $(this).hide();
-			}
-			else{
-				
-			}
-		  }); 
-	}
-	else{
-		
-	}
-// 	if($(".defender:hidden img").length===0){
-	if(clicks==1){
-		$(".fighters").find("#"+$(this).attr("id")).hide();
-		$(".defender").find("#"+$(this).attr("id")).show();	
-		enemyCharacter = $(".defender").find("#"+$(this).attr("id"));
-		$(".btn-attack").show();	
-	}
-
-	clicks++;
-    
-});
-
-		
-	</script>
 	
 </body>
 </html>
