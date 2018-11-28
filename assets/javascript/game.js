@@ -19,6 +19,10 @@ var baseDamage = 0;
 var characterArray = [Revan, Bastila, HK47, Malak];
 
 var music = new Audio("assets/audio/music.mp3");
+var characterSelect = new Audio("assets/audio/characterSelect.mp3");
+var attackSound = new Audio("assets/audio/attack.mp3");
+var playerDiedSound = new Audio("assets/audio/playerDiedSound.mp3");
+var enemyDiedSound = new Audio("assets/audio/enemyDiedSound.mp3");
 
 function addCharacterDiv(theCharacter, divClass){
 	var divContainer = $("<div>");
@@ -86,7 +90,7 @@ $(document).ready(function() {
 function attack(){
 	$(".yourDetail").show();
 	$(".enemyDetail").show();
-	
+	attackSound.play();
 	$(".yourDetail").text(userCharacter.children().eq(1).attr("data-name")+" hit "+enemyCharacter.children().eq(1).attr("data-name")+" for "+userCharacter.children().eq(1).attr("data-attack") +" points.");
 	
 	$(".enemyDetail").text(enemyCharacter.children().eq(1).attr("data-name")+" hit "+userCharacter.children().eq(1).attr("data-name")+" for "+enemyCharacter.children().eq(1).attr("data-attack") +" points.");
@@ -104,7 +108,7 @@ function attack(){
 		$(".defender .container-div").remove();
 		$(".enemyDetail").hide();
 		$(".yourDetail").text("You have defeated "+enemyCharacter.children().eq(1).attr("data-name")+". Please select a new enemy.");
-		
+		enemyDiedSound.play();
 		if($(".fighters").find(".container-div").length === 0){
 			$(".yourDetail").text("You won!!! GAME OVER!!!");
 			$(".btn-restart").show();
@@ -116,6 +120,7 @@ function attack(){
 	$(".yourCharacter .charHealth").text(userCharacter.children().eq(1).attr("data-health"));
 	
 	if(parseInt(userCharacter.children().eq(1).attr("data-health"))<=0){
+		playerDiedSound.play();
 		$(".yourCharacter .container-div").remove();
 		$(".yourDetail").hide();
 		$(".enemyDetail").text("You were defeated. GAME OVER!!!");
@@ -133,7 +138,7 @@ function addListeners(){
 					$(this).css("background-color", "teal");
 					userCharacter = $(this);
 					baseDamage = $(this).children().eq(1).attr("data-attack");
-										
+					characterSelect.play();
 					$(".characters .container-div").each(function(){
 						$(this).css("background-color", "red");
 					    $(this).appendTo(".fighters");
@@ -149,6 +154,7 @@ function addListeners(){
 					$(this).css("background-color", "black");
 					$(this).css("color", "white");
 					$(this).css("border-color", "red");
+					characterSelect.play();
 					enemyCharacter = $(this);
 					$(".btn-attack").show();
 				}
