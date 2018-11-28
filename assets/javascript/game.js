@@ -18,6 +18,8 @@ var baseDamage = 0;
 
 var characterArray = [Revan, Bastila, HK47, Malak];
 
+var music = new Audio("assets/audio/music.mp3");
+
 function addCharacterDiv(theCharacter, divClass){
 	var divContainer = $("<div>");
 		divContainer.addClass("container-div");
@@ -50,18 +52,15 @@ function newGame(){
 	for(var i = 0; i<characterArray.length; i++){
 		addCharacterDiv(characterArray[i], ".characters");
 	}
-// 	console.log("Added Characters");
 	addListeners();
 }
 
 $(document).ready(function() {
 	newGame();
+	music.play();
 	
 	$(".btn-attack").on("click", function() {
-// 		console.log("Attack");
 		if ($(".defender").find(".container-div").length > 0 && $(".yourCharacter").find(".container-div").length > 0){
-// 			console.log($(".defender").find(".container-div").length);
-// 			console.log($(".yourCharacter").find(".container-div").length);
 			attack();
 		}
 	});
@@ -82,17 +81,13 @@ function attack(){
 	var strike = parseInt(enemyCharacter.children().eq(1).attr("data-health"))-parseInt(userCharacter.children().eq(1).attr("data-attack"));
 	enemyCharacter.children().eq(1).attr("data-health", strike);
 	var userAttackIncrease = parseInt(userCharacter.children().eq(1).attr("data-attack"))+parseInt(baseDamage);
-// 	console.log("user attack damage "+userAttackIncrease);
 	userCharacter.children().eq(1).attr("data-attack", userAttackIncrease);
 	
 	if(parseInt(enemyCharacter.children().eq(1).attr("data-health"))>0){
 		var enemyStrike = parseInt(userCharacter.children().eq(1).attr("data-health"))-parseInt(enemyCharacter.children().eq(1).attr("data-attack"));
 		userCharacter.children().eq(1).attr("data-health", enemyStrike);
-// 		console.log("enemy still has health");
 	}
 	else{
-// 		console.log("enemy has no more health");
-// 		console.log($(enemyCharacter));
 		$(".defender .container-div").remove();
 		$(".enemyDetail").hide();
 		$(".yourDetail").text("You have defeated "+enemyCharacter.children().eq(1).attr("data-name")+". Please select a new enemy.");
@@ -103,8 +98,6 @@ function attack(){
 		}
 		
 	}
-// 	console.log(userCharacter.children().eq(1).attr("data-health"));
-// 	console.log(enemyCharacter.children().eq(1).attr("data-health"));
 	
 	$(".defender .charHealth").text(enemyCharacter.children().eq(1).attr("data-health"));
 	$(".yourCharacter .charHealth").text(userCharacter.children().eq(1).attr("data-health"));
@@ -113,28 +106,20 @@ function attack(){
 		$(".yourCharacter .container-div").remove();
 		$(".yourDetail").hide();
 		$(".enemyDetail").text("You were defeated. GAME OVER!!!");
-// 		console.log("YOU LOST");
 		$(".btn-restart").show();
 	}
 }
 
 function addListeners(){
 	$(".container-div").on("click", function() {
-// 		console.log($(this).parents(".characters").length);
-// 		console.log("Hide element");
 		if ($(".yourCharacter").find(".container-div").length === 0 && $(".btn-restart").is(":hidden")){ 
 			for(var i = 0; i<characterArray.length; i++){
-// 				console.log(characterArray[i].name);
-// 				console.log($(this).text().substr(0, $(this).text().length-3));
 				if(characterArray[i].name === $(this).text().substr(0, $(this).text().length-3)){
-// 					console.log("found it");
-// 					addCharacterDiv(characterArray[i], ".yourCharacter");
 					$(this).appendTo(".yourCharacter");
 					$(this).css("border-color", "red");
 
 					userCharacter = $(this);
 					baseDamage = $(this).children().eq(1).attr("data-attack");
-// 					$(this).remove();
 										
 					$(".characters .container-div").each(function(){
 						$(this).css("background-color", "red");
@@ -146,17 +131,12 @@ function addListeners(){
 		}
 		else if ($(".defender").find(".container-div").length === 0 && $(this).parents(".fighters").length>0){ 
 			for(var i = 0; i<characterArray.length; i++){
-// 				console.log(characterArray[i].name);
-// 				console.log($(this).text().substr(0, $(this).text().length-3));
 				if(characterArray[i].name === $(this).text().substr(0, $(this).text().length-3)){
-// 					console.log("found it");
-					//addCharacterDiv(characterArray[i], ".defender");
 					$(this).appendTo(".defender");
 					$(this).css("background-color", "black");
 					$(this).css("color", "white");
 					$(this).css("border-color", "red");
 					enemyCharacter = $(this);
-// 					$(this).remove();
 					$(".btn-attack").show();
 				}
 			}
