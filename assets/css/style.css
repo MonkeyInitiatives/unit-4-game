@@ -22,6 +22,27 @@ h4, h6{
     1px 1px 0 #000; 
 }
 
+.myNavBar{
+	 background-color: teal;
+	 overflow: hidden;
+}
+
+.myNavBar a {
+  font-family: SLIDER;
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.myNavBar a:hover {
+  background-color: red;
+  color: black;
+}
+
 .characters p{
 	color:white;
 	font-family: SLIDER;
