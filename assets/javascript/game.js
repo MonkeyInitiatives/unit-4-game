@@ -3,13 +3,13 @@ function character(name, health, attack, counter){
 	this.health = health;
 	this.attack = attack;
 	this.counter = counter;
-	this.image = "assets/images/"+name+".jpg";
+	this.image = "assets/images/"+name+".png";
 };
 
-var Revan = new character("Revan", 120, 8, 8);
-var Bastila = new character("Bastila", 100, 5, 5);
-var HK47 = new character("HK47", 150, 20, 20);
-var Malak = new character("Malak", 180, 25, 25);
+var Revan = new character("Liara", 120, 8, 8);
+var Bastila = new character("Garrus", 100, 5, 5);
+var HK47 = new character("Mordin", 150, 20, 20);
+var Malak = new character("Tali", 180, 25, 25);
 
 var userCharacter;
 var enemyCharacter;
