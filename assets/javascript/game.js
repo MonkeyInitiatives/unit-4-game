@@ -38,6 +38,20 @@ function addCharacterDiv(theCharacter, divClass){
 	$(divContainer).append("<p class=\"charHealth\">"+theCharacter.health+"</p>");
 }
 
+function playMusic(){
+	if(music.paused){
+		music.play();
+		document.getElementById("playMusic").style.backgroundColor = "red";
+	}
+	else if(!music.paused){
+		music.pause();
+		document.getElementById("playMusic").style.backgroundColor = "black	";
+	}
+	else{
+		//nothing
+	}
+}
+
 function newGame(){
 // 	console.log("New Game");
 	$(".btn-attack").hide();
@@ -57,7 +71,6 @@ function newGame(){
 
 $(document).ready(function() {
 	newGame();
-	music.play();
 	
 	$(".btn-attack").on("click", function() {
 		if ($(".defender").find(".container-div").length > 0 && $(".yourCharacter").find(".container-div").length > 0){
@@ -117,7 +130,7 @@ function addListeners(){
 				if(characterArray[i].name === $(this).text().substr(0, $(this).text().length-3)){
 					$(this).appendTo(".yourCharacter");
 					$(this).css("border-color", "red");
-
+					$(this).css("background-color", "teal");
 					userCharacter = $(this);
 					baseDamage = $(this).children().eq(1).attr("data-attack");
 										

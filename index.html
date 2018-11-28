@@ -12,41 +12,72 @@
 	  <script src="assets/javascript/game.js"></script>
 </head>
 <body>
-	
 	<div class="container">
-		<div class="row characters character">
+		<div class="topnav">
+			<a href="#" onclick="newGame()">New Game</a>
+			<a href="#" onclick="playMusic()">Music</a>
 		</div>
 	</div>
 	<div class="container">
-		<h1>Your Character</h1>
-		<div class="row yourCharacter character">
-		</div>
-	</div>
-	
-	<div class="container">
-		<h1>Enemies Available to Attack</h1>
-		<div class="row fighters character">
+		<div class="row justify-content-center characters character">
 		</div>
 	</div>
 	
 	<div class="container">
-		<h1>Defender</h1>
-		<div class="row defender character">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="container">
+					<h4>Player</h4>
+					<div class="row yourCharacter character">
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="container">
+					<h4>Enemies Available to Attack</h4>
+					<div class="row fighters character">
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	
 	<div class="container">
-		<button type="button" class="btn btn-primary btn-lg btn-attack">Attack</button>
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="container">
+					<h4>Defender</h4>
+					<div class="row defender character">
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="container">
+					<h4>Game Details</h4>
+					<h6 class="yourDetail">Your Attacks</h6>
+					<h6 class="enemyDetail">Enemy Attacks</h6>
+				</div>
+			</div>
+		</div>
 	</div>
+	
 	
 	<div class="container">
-		<h3 class="yourDetail">Your Attacks</h3>
-		<h3 class="enemyDetail">Enemy Attacks</h3>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="container">
+					<button type="button" class="btn btn-primary btn-lg btn-attack">Attack</button>
+					<button type="button" class="btn btn-primary btn-lg btn-restart">Restart</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
+<!--
 	<div class="container">
 		<button type="button" class="btn btn-primary btn-lg btn-restart">Restart</button>
 	</div>
+-->
 	
 </body>
 </html>

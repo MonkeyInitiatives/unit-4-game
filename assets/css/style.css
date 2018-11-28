@@ -1,6 +1,50 @@
+@font-face {
+    font-family: 'SLIDER';
+    src: url('../font/me123-webfont.woff2') format('woff2'),
+         url('../font/me123-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body{
-  background: url("../images/background.jpg");
+  background: url("../images/background2.jpg");
   height: 100%;
+}
+
+h4, h6{
+  color: white;
+  font-family: SLIDER;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
+
+.characters p{
+	color:white;
+	font-family: SLIDER;
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
+
+.yourCharacter p{
+	color: white;
+	font-family: SLIDER;
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
+
+.fighters p{
+	font-family: SLIDER;
+
 }
 
 .character-image {
@@ -15,8 +59,27 @@ body{
     text-align: center;
     color: black;
     padding: 5px 20px;
+    text-shadow:
+    -1px -1px 0 #FFF,
+    1px -1px 0 #FFF,
+    -1px 1px 0 #FFF,
+    1px 1px 0 #FFF; 
+}
+
+.defender{
+	font-family: SLIDER;
+	text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
+
+.btn{
+	font-family: SLIDER;
 
 }
+
 .container-div{
 	border: black;
     border-style: solid;
