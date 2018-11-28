@@ -99,7 +99,19 @@ h4, h6{
 
 .btn{
 	font-family: SLIDER;
+	 background-color: teal;
+	 border-color: teal;
+}
 
+.btn:hover, .btn:active {
+	outline: none !important;
+	box-shadow: none;
+	background-color: red;
+	border-color: red;
+}
+.btn:focus{
+	outline: none !important;
+	box-shadow: none;	
 }
 
 .container-div{
