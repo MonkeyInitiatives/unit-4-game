@@ -67,6 +67,7 @@ h4, h6{
 }
 
 .defender{
+	height: 285px;
 	font-family: SLIDER;
 	text-shadow:
     -1px -1px 0 #000,
