@@ -140,7 +140,7 @@ function addListeners(){
 			for(var i = 0; i<characterArray.length; i++){
 				if(characterArray[i].name === $(this).text().substr(0, $(this).text().length-3)){
 					$(this).appendTo(".yourCharacter");
-					$(this).css("border-color", "red");
+					$(this).css("border-color", "white");
 					$(this).css("background-color", "teal");
 					userCharacter = $(this);
 					baseDamage = $(this).children().eq(1).attr("data-attack");
