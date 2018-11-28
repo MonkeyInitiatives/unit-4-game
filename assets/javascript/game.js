@@ -23,6 +23,8 @@ var characterSelect = new Audio("assets/audio/characterSelect.mp3");
 var attackSound = new Audio("assets/audio/attack.mp3");
 var playerDiedSound = new Audio("assets/audio/playerDiedSound.mp3");
 var enemyDiedSound = new Audio("assets/audio/enemyDiedSound.mp3");
+var victory = new Audio("assets/audio/victory.mp3");
+
 
 function addCharacterDiv(theCharacter, divClass){
 	var divContainer = $("<div>");
@@ -90,7 +92,7 @@ $(document).ready(function() {
 function attack(){
 	$(".yourDetail").show();
 	$(".enemyDetail").show();
-	attackSound.play();
+	
 	$(".yourDetail").text(userCharacter.children().eq(1).attr("data-name")+" hit "+enemyCharacter.children().eq(1).attr("data-name")+" for "+userCharacter.children().eq(1).attr("data-attack") +" points.");
 	
 	$(".enemyDetail").text(enemyCharacter.children().eq(1).attr("data-name")+" hit "+userCharacter.children().eq(1).attr("data-name")+" for "+enemyCharacter.children().eq(1).attr("data-attack") +" points.");
@@ -103,6 +105,7 @@ function attack(){
 	if(parseInt(enemyCharacter.children().eq(1).attr("data-health"))>0){
 		var enemyStrike = parseInt(userCharacter.children().eq(1).attr("data-health"))-parseInt(enemyCharacter.children().eq(1).attr("data-attack"));
 		userCharacter.children().eq(1).attr("data-health", enemyStrike);
+		attackSound.play();
 	}
 	else{
 		$(".defender .container-div").remove();
@@ -110,6 +113,8 @@ function attack(){
 		$(".yourDetail").text("You have defeated "+enemyCharacter.children().eq(1).attr("data-name")+". Please select a new enemy.");
 		enemyDiedSound.play();
 		if($(".fighters").find(".container-div").length === 0){
+			enemyDiedSound.pause();
+			victory.play();
 			$(".yourDetail").text("You won!!! GAME OVER!!!");
 			$(".btn-restart").show();
 		}
@@ -120,6 +125,7 @@ function attack(){
 	$(".yourCharacter .charHealth").text(userCharacter.children().eq(1).attr("data-health"));
 	
 	if(parseInt(userCharacter.children().eq(1).attr("data-health"))<=0){
+		attackSound.pause();
 		playerDiedSound.play();
 		$(".yourCharacter .container-div").remove();
 		$(".yourDetail").hide();
